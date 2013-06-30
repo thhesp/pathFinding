@@ -24,6 +24,10 @@ public class ControlView extends JPanel implements ActionListener{
 	private static final String PAUSE = "Pause";
 	private static final String RESET = "Reset";
 	
+	private static final String SLOWER = "-";
+	private static final String FASTER = "+";
+	private static final String SPEED_RESET = "Speed Reset";
+	
 	private ControlViewListener listener;
 	private String[] algorithms;
 	private JComboBox algorithmsBox;
@@ -55,6 +59,27 @@ public class ControlView extends JPanel implements ActionListener{
 		panel.add(reset);
 		
 		add(panel);
+		
+		
+		
+		JPanel speedControls = new JPanel(new FlowLayout());
+		
+		JButton slower = new JButton(SLOWER);
+		slower.setActionCommand(SLOWER);
+		slower.addActionListener(this);
+		speedControls.add(slower);
+		
+		JButton resetSpeed = new JButton(SPEED_RESET);
+		resetSpeed.setActionCommand(SPEED_RESET);
+		resetSpeed.addActionListener(this);
+		speedControls.add(resetSpeed);
+		
+		JButton faster = new JButton(FASTER);
+		faster.setActionCommand(FASTER);
+		faster.addActionListener(this);
+		speedControls.add(faster);
+		
+		add(speedControls);
 		
 		JPanel panel2 = new JPanel(new FlowLayout());
 		
@@ -103,6 +128,22 @@ public class ControlView extends JPanel implements ActionListener{
 		if(actionCommand == RESET){
 			listener.onReset();
 		}
+			
+		if(actionCommand == SLOWER){
+			listener.onSlower();
+		}
+		
+		
+		if(actionCommand == SPEED_RESET){
+			listener.onResetSpeed();
+		}
+		
+		
+		if(actionCommand == FASTER){
+			listener.onFaster();
+		}
+		
+		
 		
 	}
 

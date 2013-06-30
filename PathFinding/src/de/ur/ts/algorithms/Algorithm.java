@@ -47,7 +47,9 @@ public abstract class Algorithm extends Thread{
 	}
 	
 	public void faster(){
-		sleepMs  -= 10;
+		if(sleepMs > 0){
+			sleepMs  -= 10;
+		}
 	}
 	
 	public void slower(){
@@ -89,7 +91,6 @@ public abstract class Algorithm extends Thread{
 	}
 	
 	protected void stepBack(){
-		System.out.println("Step Back");
 		if(history.isEmpty()){
 			finished = true;
 		}else{

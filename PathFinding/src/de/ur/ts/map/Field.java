@@ -156,4 +156,11 @@ public class Field {
 		return str;
 	}
 
+	public void resetAlgorithmData() {
+		active = false;
+		inUse = false;
+		hasValue = false;
+		algorithmValue = "";
+	}
+
 }

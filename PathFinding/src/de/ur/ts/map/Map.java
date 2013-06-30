@@ -182,4 +182,12 @@ public class Map {
 		resetGoal();
 	}
 
+	public void resetAlgorithmData() {
+		for(int rowIndex = 0; rowIndex < rows; rowIndex++){
+			for(int colIndex = 0; colIndex < cols; colIndex++){
+				map[rowIndex][colIndex].resetAlgorithmData();
+			}
+		}
+	}
+
 }

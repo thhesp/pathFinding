@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import de.ur.ts.algorithms.Algorithm;
+import de.ur.ts.algorithms.AlgorithmFactory;
 import de.ur.ts.algorithms.DepthFirstSearch;
 import de.ur.ts.interfaces.AlgorithmListener;
 import de.ur.ts.interfaces.ControlViewListener;
@@ -16,6 +17,15 @@ import de.ur.ts.view.GUI;
 
 public class Controller implements MapViewListener, ControlViewListener,
 		DialogListener, AlgorithmListener {
+	
+	private static enum ALGORITHMNAMES{
+		DepthFirst,
+		DiagonalDepthFirst,
+		CompleteDepthFirst,
+		BreadthFirst,
+		DiagonalBreadthFirst,
+		CompleteBreathFirst
+	}
 
 	private GUI gui;
 	private Map map;
@@ -23,10 +33,12 @@ public class Controller implements MapViewListener, ControlViewListener,
 
 	private ArrayList<ControllerListener> listeners = new ArrayList<ControllerListener>();
 
-	private String[] algorithms = { "Breitensuche", "Tiefensuche" };
+	
+	
+
 
 	public Controller() {
-		gui = new GUI(this, algorithms);
+		gui = new GUI(this, AlgorithmFactory.getAlgorithmList());
 	}
 
 	public void addListener(ControllerListener listener) {
@@ -98,13 +110,7 @@ public class Controller implements MapViewListener, ControlViewListener,
 	}
 
 	private void startAlgorithm(String algorithmName) {
-		if (algorithmName == "Breitensuche") {
-
-		} else if (algorithmName == "Tiefensuche") {
-			algorithm = new DepthFirstSearch(map);
-
-		}
-		
+		algorithm = AlgorithmFactory.getInstance(algorithmName, map);
 		
 		if(algorithm != null){
 			algorithm.setListener(this);
@@ -127,6 +133,9 @@ public class Controller implements MapViewListener, ControlViewListener,
 		if (algorithm != null) {
 			algorithm.stopAlgorithm();
 		}
+		
+		map.resetAlgorithmData();
+		notifyMapChange();
 	}
 
 	@Override
@@ -156,19 +165,19 @@ public class Controller implements MapViewListener, ControlViewListener,
 		notifyMapChange();
 	}
 	
-	public void faster(){
+	public void onFaster(){
 		if(algorithm != null){
 			algorithm.faster();
 		}
 	}
 	
-	public void slower(){
+	public void onSlower(){
 		if(algorithm != null){
 			algorithm.slower();
 		}
 	}
 	
-	public void resetSleep(){
+	public void onResetSpeed(){
 		if(algorithm != null){
 			algorithm.resetSleep();
 		}
