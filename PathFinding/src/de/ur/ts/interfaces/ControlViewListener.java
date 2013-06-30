@@ -2,9 +2,9 @@ package de.ur.ts.interfaces;
 
 public interface ControlViewListener {
 	
-	public void onStart();
+	public void onStart(String algorithmName);
 	public void onPause();
 	public void onStop();
-	public void onAlgorithmChange();
+	public void onReset();
 
 }

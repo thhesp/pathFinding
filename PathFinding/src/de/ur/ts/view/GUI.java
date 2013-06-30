@@ -19,9 +19,12 @@ public class GUI extends JFrame {
 	private ControlView controlView;
 	private StartDialog startDialog;
 	
-	public GUI(Controller controller){
+	public GUI(Controller controller, String[] algorithms){
 		super(WINDOW_NAME);
 		setLookAndFeel();
+	    startDialog = new StartDialog(this);
+	    mapView = new MapView();
+	    controlView = new ControlView(algorithms);
 		setupFrame();
 		setListeners(controller);
 		
@@ -31,9 +34,7 @@ public class GUI extends JFrame {
 	private void setupFrame(){
 		  setTitle(WINDOW_NAME);
 	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      startDialog = new StartDialog(this);
-	      mapView = new MapView();
-	      controlView = new ControlView();
+
 	      JPanel panel = new JPanel();
 	      panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 	      panel.add(mapView);

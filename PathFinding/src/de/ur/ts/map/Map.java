@@ -7,8 +7,8 @@ public class Map {
 	private int rows, cols;
 	private Field[][] map;
 	
-	private int startX, startY;
-	private int goalX, goalY;
+	private int startCol, startRow;
+	private int goalCol, goalRow;
 	
 	public Map(int cols, int rows){
 		this.rows = rows;
@@ -17,6 +17,22 @@ public class Map {
 		createMap();
 		resetStart();
 		resetGoal();
+	}
+	
+	public boolean hasStart(){
+		return  (startRow != DEFAULT_VALUE && startCol != DEFAULT_VALUE);
+	}
+	
+	public boolean hasGoal(){
+		return (goalRow != DEFAULT_VALUE && goalCol != DEFAULT_VALUE);
+	}
+	
+	public Field getStart(){
+		return map[startRow][startCol];
+	}
+	
+	public Field getGoal(){
+		return map[goalRow][goalCol];
 	}
 	
 	public int getWidth(){
@@ -28,9 +44,9 @@ public class Map {
 	}
 	
 	public boolean setStart(int x, int y){
-		if(map[x][y].isEmpty() && x != goalX && y != goalY){
-			startX = x;
-			startY = y;
+		if(map[x][y].isEmpty() && (x != goalCol || y != goalRow)){
+			startCol = x;
+			startRow = y;
 			
 			return true;
 		}
@@ -39,9 +55,9 @@ public class Map {
 	}
 	
 	public boolean setGoal(int x, int y){
-		if(map[x][y].isEmpty() && x != startX && y != startY){
-			goalX = x;
-			goalY = y;
+		if(map[x][y].isEmpty() && (x != startCol || y != startRow)){
+			goalCol = x;
+			goalRow = y;
 			
 			return true;
 		}
@@ -50,28 +66,28 @@ public class Map {
 	}
 	
 	public int getStartX(){
-		return startX;
+		return startCol;
 	}
 	
 	public int getStartY(){
-		return startY;
+		return startRow;
 	}
 	
 	public int getGoalX(){
-		return goalX;
+		return goalCol;
 	}
 	
 	public int getGoalY(){
-		return goalY;
+		return goalRow;
 	}
 	
 	public boolean isStart(int x, int y){
-		if(x != DEFAULT_VALUE && x == startX && y == startY) return true;
+		if(x != DEFAULT_VALUE && x == startCol && y == startRow) return true;
 		return false;
 	}
 	
 	public boolean isGoal(int x, int y){
-		if(x != DEFAULT_VALUE && x == goalX && y == goalY) return true;
+		if(x != DEFAULT_VALUE && x == goalCol && y == goalRow) return true;
 		return false;
 	}
 	
@@ -144,7 +160,7 @@ public class Map {
 		return map[rowIndex][colIndex];
 	}
 	
-	public void resetMap(){
+	public void resetFields(){
 		for(int rowIndex = 0; rowIndex < rows; rowIndex++){
 			for(int colIndex = 0; colIndex < cols; colIndex++){
 				map[rowIndex][colIndex].reset();
@@ -153,11 +169,17 @@ public class Map {
 	}
 	
 	public void resetStart(){
-		startX = startY = DEFAULT_VALUE;
+		startCol = startRow = DEFAULT_VALUE;
 	}
 	
 	public void resetGoal(){
-		goalX = goalY = DEFAULT_VALUE;
+		goalCol = goalRow = DEFAULT_VALUE;
+	}
+	
+	public void reset(){
+		resetFields();
+		resetStart();
+		resetGoal();
 	}
 
 }

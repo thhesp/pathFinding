@@ -22,6 +22,7 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 	private static final Color GOAL_COLOR = new Color(255,0,0);
 	private static final Color OCCUPIED_COLOR = new Color(0,0,0);
 	private static final Color IN_USE_COLOR = new Color(0,255,255);
+	private static final Color ACTIVE_COLOR = new Color(255,255,0);
 	private static final Color DEFAULT_COLOR = new Color(125,125,125);
 	
 	private int fieldHeight, fieldWidth;
@@ -59,18 +60,25 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 						g.setColor(OCCUPIED_COLOR);
 					}else if(f.isInUse()){
 						g.setColor(IN_USE_COLOR);
-					}else if(map.isStart(col, row)){
-						g.setColor(START_COLOR);
-					}else if(map.isGoal(col, row)){
-						g.setColor(GOAL_COLOR);
 					}else{
 						g.setColor(DEFAULT_COLOR);
 					}
+					
+					if(map.isStart(col, row)){
+						g.setColor(START_COLOR);
+					}else if(map.isGoal(col, row)){
+						g.setColor(GOAL_COLOR);
+					}
+					
+					if(f.isActive()){
+						g.setColor(ACTIVE_COLOR);
+					}
+					
 					g.fillRect(col*fieldWidth, row*fieldHeight, fieldWidth, fieldHeight);
 					g.setColor(Color.BLACK);
 					g.drawRect(col*fieldWidth, row*fieldHeight, fieldWidth, fieldHeight);
 					if(f.hasValue()){
-						g.drawString(f.getValue(), col*fieldWidth - (fieldWidth/2), row*fieldHeight- (fieldHeight/2));
+						g.drawString(f.getValue(), col*fieldWidth + (fieldWidth/2), row*fieldHeight + (fieldHeight/2));
 					}
 				}
 			}

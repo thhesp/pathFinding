@@ -58,6 +58,7 @@ public class StartDialog extends JDialog implements ActionListener{
         
         
         JButton start = new JButton("Start");
+        start.setActionCommand(START);
         start.addActionListener(this);
         panel.add(start);
         

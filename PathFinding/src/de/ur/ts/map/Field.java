@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Field {
 	
 	private boolean inUse = false;
+	private boolean active = false;
 	private boolean empty = true;
 	private boolean hasValue = false;
 	private String algorithmValue = "";
@@ -32,6 +33,18 @@ public class Field {
 		algorithmValue = value;
 		hasValue = true;
 		this.empty = empty;
+	}
+	
+	public boolean isActive(){
+		return active;
+	}
+	
+	public void activate(){
+		active = true;
+	}
+	
+	public void deactivate(){
+		active = false;
 	}
 	
 	public boolean isInUse(){
@@ -81,11 +94,11 @@ public class Field {
 	}
 	
 	public void addNeighbor(Field f){
-		neighbors.add(f);
+		if(!neighbors.contains(f) && !diagNeighbors.contains(f)) neighbors.add(f);
 	}
 	
 	public void addDiagNeighbor(Field f){
-		diagNeighbors.add(f);
+		if(!neighbors.contains(f) && !diagNeighbors.contains(f)) diagNeighbors.add(f);
 	}
 	
 	public ArrayList<Field> getNeighbors(){
@@ -111,13 +124,14 @@ public class Field {
 	}
 	
 	public void reset(){
+		active = false;
 		inUse = false;
 		empty = true;
 		hasValue = false;
 		algorithmValue = "";
 	}
 	
-	public String toString(){
+	public String asString(){
 		String str = "";
 		if(empty){
 			str += "The Field is empty.\n";
@@ -130,6 +144,14 @@ public class Field {
 		}else{
 			str += "The Field has no value. \n";
 		}
+		
+		if(active){
+			str += "The Field is active. \n";
+		}else{
+			str += "The Field is inactive. \n";
+		}
+		
+		str += this;
 		
 		return str;
 	}
