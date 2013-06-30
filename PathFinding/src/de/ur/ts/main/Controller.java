@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import de.ur.ts.algorithms.Algorithm;
-import de.ur.ts.algorithms.Tiefensuche;
+import de.ur.ts.algorithms.DepthFirstSearch;
 import de.ur.ts.interfaces.AlgorithmListener;
 import de.ur.ts.interfaces.ControlViewListener;
 import de.ur.ts.interfaces.ControllerListener;
@@ -101,7 +101,7 @@ public class Controller implements MapViewListener, ControlViewListener,
 		if (algorithmName == "Breitensuche") {
 
 		} else if (algorithmName == "Tiefensuche") {
-			algorithm = new Tiefensuche(map);
+			algorithm = new DepthFirstSearch(map);
 
 		}
 		
