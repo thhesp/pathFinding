@@ -88,7 +88,7 @@ public class Controller implements MapViewListener, ControlViewListener,
 		if (algorithm != null && algorithm.isPaused()) {
 			algorithm.resumeAlgorithm();
 		} else {
-			if (map.hasStart() && map.hasGoal()) {
+			if (map != null && map.hasStart() && map.hasGoal()) {
 				if (algorithm != null && algorithm.isRunning()) {
 					System.out
 							.println("There is still another running Algorithm!");

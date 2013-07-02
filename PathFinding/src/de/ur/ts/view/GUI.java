@@ -17,8 +17,6 @@ import de.ur.ts.map.MapLoader;
 public class GUI extends JFrame {
 	private static final String WINDOW_NAME = "Path Finding";
 	
-	private Controller controller;
-	
 	private MapView mapView;
 	private ControlView controlView;
 	

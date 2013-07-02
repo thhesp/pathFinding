@@ -24,7 +24,7 @@ public class DepthFirstSearch extends Algorithm {
 			stepBack();
 			return;
 		}
-		Iterator it = neighbors.iterator();
+		Iterator<Field> it = neighbors.iterator();
 		while(it.hasNext()){
 			Field f = ((Field) it.next());
 			if(!f.isInUse() && f.isEmpty()){
