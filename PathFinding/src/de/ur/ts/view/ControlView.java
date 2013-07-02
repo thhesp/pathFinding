@@ -22,7 +22,11 @@ public class ControlView extends JPanel implements ActionListener{
 	private static final String START = "Start";
 	private static final String STOP = "Stop";
 	private static final String PAUSE = "Pause";
-	private static final String RESET = "Reset";
+	
+	private static final String CREATE_MAP = "Create Map";
+	private static final String LOAD_MAP = "Load Map";
+	private static final String SAVE_MAP = "Save Map";
+	private static final String RESET_MAP = "Reset Map";
 	
 	private static final String SLOWER = "-";
 	private static final String FASTER = "+";
@@ -52,13 +56,32 @@ public class ControlView extends JPanel implements ActionListener{
 		algorithmsBox.setActionCommand(ALGORITHM_SELECTED);
 		algorithmsBox.addActionListener(this);
 		panel.add(algorithmsBox);
-		
-		JButton reset = new JButton(RESET);
-		reset.setActionCommand(RESET);
-		reset.addActionListener(this);
-		panel.add(reset);
-		
+	
 		add(panel);
+		
+		JPanel mapSettings = new JPanel(new FlowLayout());
+		
+		JButton create = new JButton(CREATE_MAP);
+		create.setActionCommand(CREATE_MAP);
+		create.addActionListener(this);
+		mapSettings.add(create);
+		
+		JButton load = new JButton(LOAD_MAP);
+		load.setActionCommand(LOAD_MAP);
+		load.addActionListener(this);
+		mapSettings.add(load);
+		
+		JButton save = new JButton(SAVE_MAP);
+		save.setActionCommand(SAVE_MAP);
+		save.addActionListener(this);
+		mapSettings.add(save);
+		
+		JButton reset = new JButton(RESET_MAP);
+		reset.setActionCommand(RESET_MAP);
+		reset.addActionListener(this);
+		mapSettings.add(reset);
+		
+		add(mapSettings);
 		
 		
 		
@@ -125,8 +148,21 @@ public class ControlView extends JPanel implements ActionListener{
 			listener.onPause();
 		}
 		
-		if(actionCommand == RESET){
-			listener.onReset();
+		if(actionCommand == CREATE_MAP){
+			listener.onCreateMap();
+		}
+			
+		if(actionCommand == LOAD_MAP){
+			listener.onLoadMap();
+		}
+		
+		if(actionCommand == SAVE_MAP){
+			listener.onSaveMap();
+		}
+			
+		
+		if(actionCommand == RESET_MAP){
+			listener.onResetMap();
 		}
 			
 		if(actionCommand == SLOWER){

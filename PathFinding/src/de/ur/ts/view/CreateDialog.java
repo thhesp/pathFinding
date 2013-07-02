@@ -12,11 +12,11 @@ import javax.swing.JTextField;
 
 import de.ur.ts.interfaces.DialogListener;
 
-public class StartDialog extends JDialog implements ActionListener{
+public class CreateDialog extends JDialog implements ActionListener{
 	
-	private static String TITLE = "Programm initalization";
-	private static final String START = "Start";
-	private static final int DEFAULT_WINDOW_HEIGHT = 120;
+	private static String TITLE = "Create Map";
+	private static final String START = "Create Map";
+	private static final int DEFAULT_WINDOW_HEIGHT = 110;
 	private static final int DEFAULT_WINDOW_WIDTH = 100;
 	
 	private int rows = 0;
@@ -26,7 +26,7 @@ public class StartDialog extends JDialog implements ActionListener{
 	
 	private JTextField colsTextField, rowsTextField;
 	
-	public StartDialog(GUI parent){
+	public CreateDialog(GUI parent){
 		super(parent, TITLE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setSize(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
@@ -73,7 +73,7 @@ public class StartDialog extends JDialog implements ActionListener{
 		if(e.getActionCommand().equals(START)){
 			// get Data from TextFields and save in WeightInfo for Second Part
 			if(rows >= 0 && cols >= 0){
-				listener.changedMapSize(cols, rows);
+				listener.createMap(cols, rows);
 				dispose();
 			}
 		}

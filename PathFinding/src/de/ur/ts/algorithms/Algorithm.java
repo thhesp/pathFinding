@@ -49,7 +49,7 @@ public abstract class Algorithm extends Thread{
 	public void faster(){
 		if(sleepMs > 0){
 			sleepMs  -= 10;
-		}
+		} 	
 	}
 	
 	public void slower(){

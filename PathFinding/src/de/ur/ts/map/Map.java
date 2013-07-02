@@ -1,5 +1,7 @@
 package de.ur.ts.map;
 
+import org.json.JSONObject;
+
 public class Map {
 	
 	private static final int DEFAULT_VALUE = -1;
@@ -188,6 +190,25 @@ public class Map {
 				map[rowIndex][colIndex].resetAlgorithmData();
 			}
 		}
+	}
+	
+	public JSONObject toJSON(){
+		JSONObject obj = new JSONObject();
+		obj.put("Columns", cols);
+		obj.put("Rows", rows);
+		obj.put("StartCol", startCol);
+		obj.put("StartRow", startRow);
+		obj.put("GoalCol" , goalCol);
+		obj.put("GoalRow", goalRow);
+		
+		for(int rowIndex = 0; rowIndex < rows; rowIndex++){
+			for(int colIndex = 0; colIndex < cols; colIndex++){
+				if(!map[rowIndex][colIndex].isEmpty()){
+					obj.put(rowIndex + ":" + colIndex, true);
+				}
+			}
+		}
+		return obj;
 	}
 
 }

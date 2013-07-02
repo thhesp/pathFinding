@@ -1,14 +1,18 @@
 package de.ur.ts.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import de.ur.ts.interfaces.DialogListener;
 import de.ur.ts.main.Controller;
 import de.ur.ts.map.Map;
+import de.ur.ts.map.MapLoader;
 
 public class GUI extends JFrame {
 	private static final String WINDOW_NAME = "Path Finding";
@@ -17,18 +21,14 @@ public class GUI extends JFrame {
 	
 	private MapView mapView;
 	private ControlView controlView;
-	private StartDialog startDialog;
 	
 	public GUI(Controller controller, String[] algorithms){
 		super(WINDOW_NAME);
 		setLookAndFeel();
-	    startDialog = new StartDialog(this);
 	    mapView = new MapView();
 	    controlView = new ControlView(algorithms);
 		setupFrame();
 		setListeners(controller);
-		
-		startDialog.setVisible(true);
 	}
 	
 	private void setupFrame(){
@@ -49,7 +49,6 @@ public class GUI extends JFrame {
 	private void setListeners(Controller controller){
 		mapView.setListener(controller);
 		controlView.setListener(controller);
-		startDialog.setListener(controller);
 		
 		controller.addListener(mapView);
 	}
@@ -78,8 +77,40 @@ public class GUI extends JFrame {
 	    }
 	}
 
-	public void setMapSize(int cols, int rows) {
+	public void createMapDialog(Controller controller) {
+		CreateDialog startDialog = new CreateDialog(this);
+		startDialog.setListener(controller);
 		
+		startDialog.setVisible(true);
+	}
+
+	public void loadMapDialog(Controller controller) {
+		JFileChooser fc = new JFileChooser();
+		fc.setCurrentDirectory(new java.io.File("./src/de/ur/ts/maps"));
+		fc.setDialogTitle("Choose Load File");
+		
+		int returnVal = fc.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            Map map;
+			try {
+				map = MapLoader.loadMap(file);
+				controller.loadMap(map);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+        }
+
+	}
+
+	public void saveMapDialog(Controller controller, Map map) {
+		SaveDialog saveDialog = new SaveDialog(this, map);
+		saveDialog.setListener(controller);
+		
+		saveDialog.setVisible(true);
 		
 	}
 

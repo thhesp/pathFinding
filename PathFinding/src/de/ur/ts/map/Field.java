@@ -2,6 +2,8 @@ package de.ur.ts.map;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 public class Field {
 	
 	private boolean inUse = false;
@@ -162,5 +164,4 @@ public class Field {
 		hasValue = false;
 		algorithmValue = "";
 	}
-
 }

@@ -1,7 +1,9 @@
 package de.ur.ts.interfaces;
 
+import de.ur.ts.map.Map;
+
 public interface DialogListener {
 	
-	public void changedMapSize(int cols, int rows);
+	public void createMap(int cols, int rows);
 
 }

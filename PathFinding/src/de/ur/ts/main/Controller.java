@@ -17,14 +17,9 @@ import de.ur.ts.view.GUI;
 
 public class Controller implements MapViewListener, ControlViewListener,
 		DialogListener, AlgorithmListener {
-	
-	private static enum ALGORITHMNAMES{
-		DepthFirst,
-		DiagonalDepthFirst,
-		CompleteDepthFirst,
-		BreadthFirst,
-		DiagonalBreadthFirst,
-		CompleteBreathFirst
+
+	private static enum ALGORITHMNAMES {
+		DepthFirst, DiagonalDepthFirst, CompleteDepthFirst, BreadthFirst, DiagonalBreadthFirst, CompleteBreathFirst
 	}
 
 	private GUI gui;
@@ -32,10 +27,6 @@ public class Controller implements MapViewListener, ControlViewListener,
 	private Algorithm algorithm = null;
 
 	private ArrayList<ControllerListener> listeners = new ArrayList<ControllerListener>();
-
-	
-	
-
 
 	public Controller() {
 		gui = new GUI(this, AlgorithmFactory.getAlgorithmList());
@@ -98,12 +89,13 @@ public class Controller implements MapViewListener, ControlViewListener,
 			algorithm.resumeAlgorithm();
 		} else {
 			if (map.hasStart() && map.hasGoal()) {
-				if(algorithm != null && algorithm.isRunning()){
-					System.out.println("There is still another running Algorithm!");
-				}else{
+				if (algorithm != null && algorithm.isRunning()) {
+					System.out
+							.println("There is still another running Algorithm!");
+				} else {
 					startAlgorithm(algorithmName);
 				}
-			}else{
+			} else {
 				System.out.println("No Start/ Goal set!");
 			}
 		}
@@ -111,8 +103,8 @@ public class Controller implements MapViewListener, ControlViewListener,
 
 	private void startAlgorithm(String algorithmName) {
 		algorithm = AlgorithmFactory.getInstance(algorithmName, map);
-		
-		if(algorithm != null){
+
+		if (algorithm != null) {
 			algorithm.setListener(this);
 			algorithm.start();
 			System.out.println("Start Algorithm!");
@@ -133,25 +125,29 @@ public class Controller implements MapViewListener, ControlViewListener,
 		if (algorithm != null) {
 			algorithm.stopAlgorithm();
 		}
-		
+
 		map.resetAlgorithmData();
 		notifyMapChange();
 	}
 
 	@Override
-	public void onReset() {
+	public void onResetMap() {
 		map.reset();
 		notifyMapChange();
 	}
 
 	@Override
-	public void changedMapSize(int cols, int rows) {
+	public void createMap(int cols, int rows) {
 		map = new Map(cols, rows);
+		notifyMapSet(map);
+
+	}
+
+	private void notifyMapSet(Map map) {
 		Iterator<ControllerListener> it = listeners.iterator();
 		while (it.hasNext()) {
 			((ControllerListener) it.next()).onMapCreated(map);
 		}
-
 	}
 
 	@Override
@@ -164,23 +160,45 @@ public class Controller implements MapViewListener, ControlViewListener,
 	public void refresh() {
 		notifyMapChange();
 	}
-	
-	public void onFaster(){
-		if(algorithm != null){
+
+	public void onFaster() {
+		if (algorithm != null) {
 			algorithm.faster();
 		}
 	}
-	
-	public void onSlower(){
-		if(algorithm != null){
+
+	public void onSlower() {
+		if (algorithm != null) {
 			algorithm.slower();
 		}
 	}
-	
-	public void onResetSpeed(){
-		if(algorithm != null){
+
+	public void onResetSpeed() {
+		if (algorithm != null) {
 			algorithm.resetSleep();
 		}
+	}
+
+	@Override
+	public void onCreateMap() {
+		gui.createMapDialog(this);
+	}
+
+	@Override
+	public void onLoadMap() {
+		gui.loadMapDialog(this);
+	}
+
+	@Override
+	public void onSaveMap() {
+		if (map != null) {
+			gui.saveMapDialog(this, map);
+		}
+	}
+
+	public void loadMap(Map map) {
+		this.map = map;
+		notifyMapSet(map);
 	}
 
 }
