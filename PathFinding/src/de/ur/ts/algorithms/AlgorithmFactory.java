@@ -9,7 +9,8 @@ public class AlgorithmFactory {
 			"CompleteDepthFirst",
 			"BreadthFirst",
 			"DiagonalBreadthFirst",
-			"CompleteBreathFirst" };
+			"CompleteBreathFirst",
+			"A-Star"};
 	
 	public static Algorithm getInstance(String name, Map map){
 		if(name == algorithms[0]){
@@ -24,6 +25,8 @@ public class AlgorithmFactory {
 			return new DiagBreadthFirstSearch(map);
 		}else if(name == algorithms[5]){
 			return new CompleteBreadthFirstSearch(map);
+		}else if(name == algorithms[6]){
+			return new AStar(map);
 		}
 		
 		return null;

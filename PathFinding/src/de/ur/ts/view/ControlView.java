@@ -32,10 +32,14 @@ public class ControlView extends JPanel implements ActionListener{
 	private static final String FASTER = "+";
 	private static final String SPEED_RESET = "Speed Reset";
 	
+	private static final String DEACTIVATE_VALUES = "Hide Values";
+	private static final String ACTIVATE_VALUES = "Show Values";
+	
 	private ControlViewListener listener;
 	private String[] algorithms;
 	private JComboBox algorithmsBox;
 	private String selectedAlgorithm;
+	private JButton values;
 	
 	public ControlView(String[] algorithms){
 		this.algorithms = algorithms;
@@ -56,6 +60,12 @@ public class ControlView extends JPanel implements ActionListener{
 		algorithmsBox.setActionCommand(ALGORITHM_SELECTED);
 		algorithmsBox.addActionListener(this);
 		panel.add(algorithmsBox);
+		
+		values = new JButton(ACTIVATE_VALUES);
+		values.setActionCommand(ACTIVATE_VALUES);
+		values.addActionListener(this);
+		panel.add(values);
+		
 	
 		add(panel);
 		
@@ -179,6 +189,17 @@ public class ControlView extends JPanel implements ActionListener{
 			listener.onFaster();
 		}
 		
+		if(actionCommand == ACTIVATE_VALUES){
+			listener.onActivateValues();
+			values.setText(DEACTIVATE_VALUES);
+			values.setActionCommand(DEACTIVATE_VALUES);
+		}
+		
+		if(actionCommand == DEACTIVATE_VALUES){
+			listener.onDeactivateValues();
+			values.setText(ACTIVATE_VALUES);
+			values.setActionCommand(ACTIVATE_VALUES);
+		}
 		
 		
 	}

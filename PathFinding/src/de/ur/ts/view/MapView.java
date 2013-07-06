@@ -24,11 +24,13 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 	private static final Color IN_USE_COLOR = new Color(0,255,255);
 	private static final Color ACTIVE_COLOR = new Color(255,255,0);
 	private static final Color DEFAULT_COLOR = new Color(125,125,125);
+	private static final Color PATH = new Color(255);
 	
-	private int fieldHeight, fieldWidth;
+	private int fieldHeight, fieldWidth, xOffset, yOffset;
 	
 	private Map map;
 	private boolean mapSet = false;
+	private boolean valuesActivated = false;
 	
 	private MapViewListener listener;
 	
@@ -53,6 +55,9 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 		if(mapSet){
 			fieldHeight = getHeight() / map.getHeight();
 			fieldWidth = getWidth() / map.getWidth();
+			
+			xOffset = (getWidth() - (fieldWidth * map.getWidth())) /2;
+			yOffset = (getHeight() - (fieldHeight * map.getHeight())) /2;
 			for(int row = 0; row < map.getHeight(); row++){
 				for(int col = 0; col < map.getWidth(); col++){
 					Field f = map.getField(col, row);
@@ -74,11 +79,16 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 						g.setColor(ACTIVE_COLOR);
 					}
 					
-					g.fillRect(col*fieldWidth, row*fieldHeight, fieldWidth, fieldHeight);
+					if(f.isPath()){
+						g.setColor(PATH);
+					}
+					
+					g.fillRect(xOffset+ col*fieldWidth, yOffset + row*fieldHeight, fieldWidth,fieldHeight);
 					g.setColor(Color.BLACK);
-					g.drawRect(col*fieldWidth, row*fieldHeight, fieldWidth, fieldHeight);
-					if(f.hasValue()){
-						g.drawString(f.getValue(), col*fieldWidth + (fieldWidth/2), row*fieldHeight + (fieldHeight/2));
+					g.drawRect(xOffset+col*fieldWidth, yOffset + row*fieldHeight,fieldWidth,fieldHeight);
+					if(f.hasValue() && valuesActivated){
+						String value = f.getValueString();
+						g.drawString(value,xOffset+ col*fieldWidth + (fieldWidth/2) - value.length(),yOffset + row*fieldHeight + (fieldHeight/2));
 					}
 				}
 			}
@@ -90,8 +100,10 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 	public void mouseClicked(MouseEvent mE) {
 		int button = mE.getButton();
 		
-		int calcX = mE.getX() / fieldWidth;
-		int calcY = mE.getY() / fieldHeight;
+		int calcX = (mE.getX() -xOffset)/ fieldWidth;
+		int calcY = (mE.getY() -yOffset) / fieldHeight;
+		
+		if(calcX > map.getWidth() || calcY > map.getHeight()) return;
 		
 		if(button == MouseEvent.BUTTON1){
 			listener.onLeftButton(calcX, calcY);
@@ -139,6 +151,16 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 	@Override
 	public void onMapChange() {
 		repaint();
+	}
+
+	@Override
+	public void onDeactivateValues() {
+		valuesActivated = false;
+	}
+
+	@Override
+	public void onActivateValues() {
+		valuesActivated = true;
 	}
 	
 

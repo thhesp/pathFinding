@@ -201,4 +201,33 @@ public class Controller implements MapViewListener, ControlViewListener,
 		notifyMapSet(map);
 	}
 
+	@Override
+	public void finished() {
+		notifyDeactivateValues();
+	}
+
+	private void notifyDeactivateValues() {
+		Iterator<ControllerListener> it = listeners.iterator();
+		while (it.hasNext()) {
+			((ControllerListener) it.next()).onDeactivateValues();
+		}
+	}
+	
+	private void notifyActivateValues() {
+		Iterator<ControllerListener> it = listeners.iterator();
+		while (it.hasNext()) {
+			((ControllerListener) it.next()).onActivateValues();
+		}
+	}
+
+	@Override
+	public void onActivateValues() {
+		notifyActivateValues();
+	}
+
+	@Override
+	public void onDeactivateValues() {
+		notifyDeactivateValues();
+	}
+
 }

@@ -12,5 +12,7 @@ public interface ControlViewListener {
 	public void onLoadMap();
 	public void onSaveMap();
 	public void onResetMap();
+	public void onActivateValues();
+	public void onDeactivateValues();
 
 }

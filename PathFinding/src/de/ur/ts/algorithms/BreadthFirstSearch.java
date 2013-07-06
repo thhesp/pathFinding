@@ -38,4 +38,10 @@ public class BreadthFirstSearch extends Algorithm {
 		setCurrentField(que.get(0));
 		que.remove(0);
 	}
+
+	@Override
+	protected void markPath() {
+		// TODO Auto-generated method stub
+		
+	}
 }

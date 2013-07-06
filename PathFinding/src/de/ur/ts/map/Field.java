@@ -6,14 +6,16 @@ import org.json.JSONObject;
 
 public class Field {
 	
+	private boolean path = false;
 	private boolean inUse = false;
 	private boolean active = false;
 	private boolean empty = true;
 	private boolean hasValue = false;
-	private String algorithmValue = "";
+	private double algorithmValue = 0;
 	
 	private ArrayList<Field> neighbors = new ArrayList<Field>();
 	private ArrayList<Field> diagNeighbors = new ArrayList<Field>();
+	private Field predecessor = null;
 	
 	public Field(){
 		empty = true;
@@ -25,16 +27,24 @@ public class Field {
 		hasValue = false;
 	}
 	
-	public Field(String value){
-		algorithmValue = value;
+	public Field(double value){
+		algorithmValue = Math.floor(value * 100) / 100;
 		hasValue = true;
 		empty = true;
 	}
 	
-	public Field(boolean empty, String value){
-		algorithmValue = value;
+	public Field(boolean empty, double value){
+		algorithmValue = Math.floor(value * 100) / 100;
 		hasValue = true;
 		this.empty = empty;
+	}
+	
+	public boolean isPath() {
+		return path;
+	}
+
+	public void setPath(boolean path) {
+		this.path = path;
 	}
 	
 	public boolean isActive(){
@@ -69,13 +79,13 @@ public class Field {
 		empty = !empty;
 	}
 	
-	public void setValue(String value){
-		algorithmValue = value;
+	public void setValue(double value){
+		algorithmValue = Math.floor(value * 100) / 100;
 		hasValue = true;
 	}
 	
 	public void removeValue(){
-		algorithmValue = "";
+		algorithmValue = 0;
 		hasValue = false;
 	}
 	
@@ -83,8 +93,12 @@ public class Field {
 		return hasValue;
 	}
 	
-	public String getValue(){
+	public double getValue(){
 		return algorithmValue;
+	}
+	
+	public String getValueString(){
+		return ""+algorithmValue;
 	}
 	
 	public void setNeighbors(ArrayList<Field> list){
@@ -126,11 +140,8 @@ public class Field {
 	}
 	
 	public void reset(){
-		active = false;
-		inUse = false;
 		empty = true;
-		hasValue = false;
-		algorithmValue = "";
+		resetAlgorithmData();
 	}
 	
 	public String asString(){
@@ -159,9 +170,23 @@ public class Field {
 	}
 
 	public void resetAlgorithmData() {
+		path = false;
 		active = false;
 		inUse = false;
 		hasValue = false;
-		algorithmValue = "";
+		algorithmValue = 0;
+	}
+
+	public Field getPredecessor() {
+		return predecessor;
+	}
+
+	public void setPredecessor(Field predecessor) {
+		this.predecessor = predecessor;
+	}
+	
+	public boolean hasPredecessor(){
+		if(predecessor != null) return true;
+		return false;
 	}
 }

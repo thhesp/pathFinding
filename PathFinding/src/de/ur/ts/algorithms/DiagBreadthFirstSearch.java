@@ -40,4 +40,10 @@ public class DiagBreadthFirstSearch extends Algorithm {
 		que.remove(0);
 	}
 
+	@Override
+	protected void markPath() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

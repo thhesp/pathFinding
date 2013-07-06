@@ -7,4 +7,7 @@ public interface ControllerListener {
 	public void onMapCreated(Map map);
 	
 	public void onMapChange();
+	
+	public void onDeactivateValues();
+	public void onActivateValues();
 }

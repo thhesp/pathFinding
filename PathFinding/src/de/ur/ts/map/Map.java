@@ -154,6 +154,18 @@ public class Map {
 		}
 	}
 	
+	public int[] getFieldPosition(Field f){
+		for(int rowIndex = 0; rowIndex < rows; rowIndex++){
+			for(int colIndex = 0; colIndex < cols; colIndex++){
+				if(map[rowIndex][colIndex].equals(f)){
+					int[] pos = {colIndex, rowIndex};
+					return pos;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public Field[][] getFields(){
 		return map;
 	}

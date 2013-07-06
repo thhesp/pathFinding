@@ -39,6 +39,12 @@ public class CompleteDepthFirstSearch extends Algorithm {
 		}
 	}
 
+	@Override
+	protected void markPath() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

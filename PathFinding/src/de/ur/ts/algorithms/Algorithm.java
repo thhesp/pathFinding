@@ -12,6 +12,7 @@ public abstract class Algorithm extends Thread{
 	
 	private AlgorithmListener listener;
 	private int sleepMs = DEFAULT_SLEEP_MS;
+	private int steps = 0;
 	
 	protected boolean paused = false;
 	protected boolean finished = false;
@@ -35,17 +36,24 @@ public abstract class Algorithm extends Thread{
 				try {
 					sleep(sleepMs);
 					work();
+					steps++;
 					notifyRefresh();
 					if(finished) break;
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
+		markPath();
+		notifyFinished();
+		notifyRefresh();
 		System.out.println("Finished!");
+		System.out.println("Needed Steps: " + steps);
 	}
-	
+
+
+	protected abstract void markPath();
+
 	public void faster(){
 		if(sleepMs > 0){
 			sleepMs  -= 10;
@@ -120,6 +128,12 @@ public abstract class Algorithm extends Thread{
 	protected void notifyRefresh(){
 		if(listener != null){
 			listener.refresh();
+		}
+	}
+	
+	private void notifyFinished() {
+		if(listener != null){
+			listener.finished();
 		}
 	}
 
