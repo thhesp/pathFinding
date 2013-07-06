@@ -37,7 +37,7 @@ public class ControlView extends JPanel implements ActionListener{
 	
 	private ControlViewListener listener;
 	private String[] algorithms;
-	private JComboBox algorithmsBox;
+	private JComboBox<String> algorithmsBox;
 	private String selectedAlgorithm;
 	private JButton values;
 	
@@ -55,7 +55,7 @@ public class ControlView extends JPanel implements ActionListener{
 		
 		JPanel panel = new JPanel(new FlowLayout());
 		
-		algorithmsBox = new JComboBox(algorithms);
+		algorithmsBox = new JComboBox<String>(algorithms);
 		algorithmsBox.setEditable(false);
 		algorithmsBox.setActionCommand(ALGORITHM_SELECTED);
 		algorithmsBox.addActionListener(this);

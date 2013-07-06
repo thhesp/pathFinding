@@ -28,6 +28,7 @@ public class DepthFirstSearch extends Algorithm {
 		while(it.hasNext()){
 			Field f = ((Field) it.next());
 			if(!f.isInUse() && f.isEmpty()){
+				f.setPredecessor(currentField);
 				setCurrentField(f);
 				fieldFound = true;
 				return;
@@ -41,8 +42,7 @@ public class DepthFirstSearch extends Algorithm {
 
 	@Override
 	protected void markPath() {
-		// TODO Auto-generated method stub
-		
+		reconstructPath(goal);
 	}
 
 

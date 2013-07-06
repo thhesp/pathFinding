@@ -26,12 +26,13 @@ public class BreadthFirstSearch extends Algorithm {
 		while(it.hasNext()){
 			Field f = ((Field) it.next());
 			if(!f.isInUse() && f.isEmpty() && !que.contains(f)){
+				f.setPredecessor(currentField);
 				que.add(f);
 			}
 		}
 		
 		if(que.size() == 0 && !currentField.equals(start)){
-			finished = true;
+			failed = true;
 			return;
 		}
 		
@@ -41,7 +42,6 @@ public class BreadthFirstSearch extends Algorithm {
 
 	@Override
 	protected void markPath() {
-		// TODO Auto-generated method stub
-		
+		reconstructPath(goal);
 	}
 }

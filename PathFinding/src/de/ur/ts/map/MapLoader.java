@@ -12,11 +12,8 @@ public class MapLoader {
 
 	public static Map loadMap(File file) throws FileNotFoundException {
 		StringBuilder text = new StringBuilder();
-		String NL = System.getProperty("line.separator");
 		Scanner scanner = new Scanner(file, ENCODING);
 		try {
-			boolean found = false;
-			String temp = "";
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				text.append(line);

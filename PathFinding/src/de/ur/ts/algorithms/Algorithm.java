@@ -16,6 +16,7 @@ public abstract class Algorithm extends Thread{
 	
 	protected boolean paused = false;
 	protected boolean finished = false;
+	protected boolean failed = false;
 
 	
 	protected Map map;
@@ -31,14 +32,14 @@ public abstract class Algorithm extends Thread{
 	}
 	
 	public void run(){
-		while(!finished){
+		while(!finished && !failed){
 			while(!paused){
 				try {
 					sleep(sleepMs);
 					work();
 					steps++;
 					notifyRefresh();
-					if(finished) break;
+					if(finished || failed) break;
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -47,12 +48,14 @@ public abstract class Algorithm extends Thread{
 		markPath();
 		notifyFinished();
 		notifyRefresh();
-		System.out.println("Finished!");
-		System.out.println("Needed Steps: " + steps);
+		if(finished){
+			System.out.println("Finished!");
+			System.out.println("Needed Steps: " + steps);
+		}else if(failed){
+			System.out.println("Failed");
+			System.out.println("No path found");
+		}
 	}
-
-
-	protected abstract void markPath();
 
 	public void faster(){
 		if(sleepMs > 0){
@@ -89,7 +92,7 @@ public abstract class Algorithm extends Thread{
 	}
 	
 	public void stopAlgorithm(){
-		finished = true;
+		failed = true;
 	}
 	
 	protected void useField(Field f){
@@ -100,15 +103,24 @@ public abstract class Algorithm extends Thread{
 	
 	protected void stepBack(){
 		if(history.isEmpty()){
-			finished = true;
+			failed = true;
 		}else{
 			history.remove(history.size()-1);
 			if(history.isEmpty()){
-				finished = true;
+				failed = true;
 			}else{
 				setCurrentField(history.get(history.size()-1));
 			}
 		}
+	}
+	
+	protected double calculateDistance(Field f1, Field f2){
+		int[] pos1 = map.getFieldPosition(f1);
+		int[] pos2 =  map.getFieldPosition(f2);
+		int xVektor = pos1[0] - pos2[0];
+		int yVektor = pos1[1] - pos2[1];
+		if(xVektor == 0 && yVektor == 0) return 0;
+		return Math.sqrt((xVektor*xVektor) + (yVektor*yVektor));
 	}
 	
 
@@ -131,6 +143,13 @@ public abstract class Algorithm extends Thread{
 		}
 	}
 	
+	protected void reconstructPath(Field f) {
+		f.setPath(true);
+		if(f.hasPredecessor()){
+			reconstructPath(f.getPredecessor());
+		}
+	}
+	
 	private void notifyFinished() {
 		if(listener != null){
 			listener.finished();
@@ -138,5 +157,6 @@ public abstract class Algorithm extends Thread{
 	}
 
 	protected abstract void work();
+	protected abstract void markPath();
 
 }

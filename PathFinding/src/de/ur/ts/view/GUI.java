@@ -96,7 +96,6 @@ public class GUI extends JFrame {
 				map = MapLoader.loadMap(file);
 				controller.loadMap(map);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
             
@@ -106,8 +105,6 @@ public class GUI extends JFrame {
 
 	public void saveMapDialog(Controller controller, Map map) {
 		SaveDialog saveDialog = new SaveDialog(this, map);
-		saveDialog.setListener(controller);
-		
 		saveDialog.setVisible(true);
 		
 	}

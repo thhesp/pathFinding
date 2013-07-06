@@ -103,7 +103,7 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 		int calcX = (mE.getX() -xOffset)/ fieldWidth;
 		int calcY = (mE.getY() -yOffset) / fieldHeight;
 		
-		if(calcX > map.getWidth() || calcY > map.getHeight()) return;
+		if(calcX >= map.getWidth() || calcY >= map.getHeight()) return;
 		
 		if(button == MouseEvent.BUTTON1){
 			listener.onLeftButton(calcX, calcY);
@@ -120,27 +120,19 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent mE) {
-		// TODO Auto-generated method stub
-		
+	public void mouseEntered(MouseEvent mE) {	
 	}
 
 	@Override
 	public void mouseExited(MouseEvent mE) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent mE) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent mE) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

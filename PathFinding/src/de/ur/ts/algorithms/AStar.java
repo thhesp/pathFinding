@@ -18,7 +18,7 @@ public class AStar extends Algorithm{
 	@Override
 	protected void work() {
 		if(openSet.isEmpty()){
-			finished = true;
+			failed = true;
 			return;
 		}
 		setCurrentField(searchOpenSet());
@@ -29,13 +29,6 @@ public class AStar extends Algorithm{
 		openSet.remove(currentField);
 		closedSet.add(currentField);
 		refreshOpenSet();
-	}
-	
-	private void reconstructPath(Field f) {
-		f.setPath(true);
-		if(f.hasPredecessor()){
-			reconstructPath(f.getPredecessor());
-		}
 	}
 
 	private void refreshOpenSet() {
@@ -77,15 +70,6 @@ public class AStar extends Algorithm{
 	
 	private double calculateGScore(Field f){
 		return calculateDistance(f, start);
-	}
-	
-	private double calculateDistance(Field f1, Field f2){
-		int[] pos1 = map.getFieldPosition(f1);
-		int[] pos2 =  map.getFieldPosition(f2);
-		int xVektor = pos1[0] - pos2[0];
-		int yVektor = pos1[1] - pos2[1];
-		if(xVektor == 0 && yVektor == 0) return 0;
-		return Math.sqrt((xVektor*xVektor) + (yVektor*yVektor));
 	}
 	
 	private void setFScore(Field f){

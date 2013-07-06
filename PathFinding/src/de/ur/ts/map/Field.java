@@ -2,16 +2,16 @@ package de.ur.ts.map;
 
 import java.util.ArrayList;
 
-import org.json.JSONObject;
-
 public class Field {
+	
+	private static final double DEFAULT_VALUE = Double.MAX_VALUE;
 	
 	private boolean path = false;
 	private boolean inUse = false;
 	private boolean active = false;
 	private boolean empty = true;
 	private boolean hasValue = false;
-	private double algorithmValue = 0;
+	private double algorithmValue = DEFAULT_VALUE;
 	
 	private ArrayList<Field> neighbors = new ArrayList<Field>();
 	private ArrayList<Field> diagNeighbors = new ArrayList<Field>();
@@ -85,7 +85,7 @@ public class Field {
 	}
 	
 	public void removeValue(){
-		algorithmValue = 0;
+		algorithmValue = DEFAULT_VALUE;
 		hasValue = false;
 	}
 	
@@ -174,7 +174,7 @@ public class Field {
 		active = false;
 		inUse = false;
 		hasValue = false;
-		algorithmValue = 0;
+		algorithmValue = DEFAULT_VALUE;
 	}
 
 	public Field getPredecessor() {

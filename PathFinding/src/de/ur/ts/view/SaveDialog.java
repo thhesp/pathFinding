@@ -26,7 +26,6 @@ public class SaveDialog extends JDialog implements ActionListener {
 	private static final int DEFAULT_WINDOW_WIDTH = 160;
 
 	private Map map;
-	private DialogListener listener;
 	private JFileChooser fc;
 	private JTextField filenameField;
 	private File directory = new File("./src/de/ur/ts/maps");
@@ -41,10 +40,6 @@ public class SaveDialog extends JDialog implements ActionListener {
 		setLocationRelativeTo(null);
 		setupDialog();
 		requestFocus();
-	}
-
-	public void setListener(DialogListener listener) {
-		this.listener = listener;
 	}
 
 	private void setupDialog() {

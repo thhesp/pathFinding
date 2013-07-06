@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import de.ur.ts.algorithms.Algorithm;
 import de.ur.ts.algorithms.AlgorithmFactory;
-import de.ur.ts.algorithms.DepthFirstSearch;
 import de.ur.ts.interfaces.AlgorithmListener;
 import de.ur.ts.interfaces.ControlViewListener;
 import de.ur.ts.interfaces.ControllerListener;
@@ -17,10 +16,6 @@ import de.ur.ts.view.GUI;
 
 public class Controller implements MapViewListener, ControlViewListener,
 		DialogListener, AlgorithmListener {
-
-	private static enum ALGORITHMNAMES {
-		DepthFirst, DiagonalDepthFirst, CompleteDepthFirst, BreadthFirst, DiagonalBreadthFirst, CompleteBreathFirst
-	}
 
 	private GUI gui;
 	private Map map;
