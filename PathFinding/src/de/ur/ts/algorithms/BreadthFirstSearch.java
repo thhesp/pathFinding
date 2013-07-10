@@ -12,6 +12,7 @@ public class BreadthFirstSearch extends Algorithm {
 	
 	public BreadthFirstSearch(Map map){
 		super(map);
+		setCurrentField(start);
 	}
 
 	@Override

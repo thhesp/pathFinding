@@ -14,6 +14,7 @@ public class CompleteBreadthFirstSearch extends Algorithm {
 	
 	public CompleteBreadthFirstSearch(Map map){
 		super(map);
+		setCurrentField(start);
 	}
 
 	@Override

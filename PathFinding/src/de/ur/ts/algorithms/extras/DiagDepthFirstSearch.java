@@ -11,6 +11,7 @@ public class DiagDepthFirstSearch extends Algorithm {
 	
 	public DiagDepthFirstSearch(Map map) {
 		super(map);
+		setCurrentField(start);
 	}
 
 	@Override

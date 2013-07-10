@@ -11,6 +11,7 @@ public class Djkstra extends Algorithm {
 
 	public Djkstra(Map map) {
 		super(map);
+		setCurrentField(start);
 		currentField.setValue(0);
 		openSet.add(currentField);
 	}

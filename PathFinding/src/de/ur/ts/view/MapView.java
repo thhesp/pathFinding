@@ -68,6 +68,10 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 					}else{
 						g.setColor(DEFAULT_COLOR);
 					}
+						
+					if(f.isPath()){
+						g.setColor(PATH);
+					}
 					
 					if(map.isStart(col, row)){
 						g.setColor(START_COLOR);
@@ -77,10 +81,6 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 					
 					if(f.isActive()){
 						g.setColor(ACTIVE_COLOR);
-					}
-					
-					if(f.isPath()){
-						g.setColor(PATH);
 					}
 					
 					g.fillRect(xOffset+ col*fieldWidth, yOffset + row*fieldHeight, fieldWidth,fieldHeight);

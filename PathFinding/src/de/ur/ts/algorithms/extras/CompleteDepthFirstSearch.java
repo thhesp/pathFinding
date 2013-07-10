@@ -11,6 +11,7 @@ public class CompleteDepthFirstSearch extends Algorithm {
 	
 	public CompleteDepthFirstSearch(Map map) {
 		super(map);
+		setCurrentField(start);
 	}
 
 	@Override

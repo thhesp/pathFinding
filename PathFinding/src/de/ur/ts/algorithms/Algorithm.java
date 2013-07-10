@@ -28,7 +28,6 @@ public abstract class Algorithm extends Thread{
 		this.map = map;
 		start = map.getStart();
 		goal = map.getGoal();
-		setCurrentField(start);
 	}
 	
 	public void run(){
@@ -49,6 +48,7 @@ public abstract class Algorithm extends Thread{
 		notifyFinished();
 		notifyRefresh();
 		if(finished){
+			currentField.deactivate();
 			System.out.println("Finished!");
 			System.out.println("Needed Steps: " + steps);
 		}else if(failed){

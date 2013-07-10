@@ -10,6 +10,7 @@ public class DepthFirstSearch extends Algorithm {
 	
 	public DepthFirstSearch(Map map) {
 		super(map);
+		setCurrentField(start);
 	}
 
 	@Override

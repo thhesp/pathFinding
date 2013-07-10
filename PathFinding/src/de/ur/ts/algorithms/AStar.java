@@ -12,6 +12,7 @@ public class AStar extends Algorithm{
 
 	public AStar(Map map) {
 		super(map);
+		setCurrentField(start);
 		openSet.add(start);
 	}
 

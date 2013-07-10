@@ -14,6 +14,7 @@ public class DiagBreadthFirstSearch extends Algorithm {
 	
 	public DiagBreadthFirstSearch(Map map){
 		super(map);
+		setCurrentField(start);
 	}
 
 	@Override
