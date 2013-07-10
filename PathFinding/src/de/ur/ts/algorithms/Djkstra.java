@@ -38,7 +38,9 @@ public class Djkstra extends Algorithm {
 			double dist = calculateDistance(start, currentField) + calculateDistance(currentField, f);
 			if(dist < f.getValue()){
 				f.setValue(dist);
-				f.setPredecessor(currentField);
+				if(!f.hasPredecessor() || !currentField.getPredecessor().equals(f)){
+					f.setPredecessor(currentField);
+				}
 				openSet.add(f);
 			}
 		}
