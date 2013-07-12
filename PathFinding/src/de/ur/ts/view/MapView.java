@@ -3,9 +3,14 @@ package de.ur.ts.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.ur.ts.interfaces.ControllerListener;
@@ -133,7 +138,6 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 				}
 			}
 		}
-		
 	}
 
 	@Override
@@ -157,6 +161,22 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 			listener.onMiddleButton(calcX, calcY);
 		}
 		
+	}
+	
+	public void onSaveImage(String algorithmName){
+		BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D cg = img.createGraphics();
+		paintComponent(cg);
+		try{
+			File directory = new File("./out/" + algorithmName+"/");
+			if(!directory.isFile()){
+				directory.mkdir();
+			}
+			File outputfile = new File("./out/" + algorithmName +"/" + System.currentTimeMillis() + ".png");
+			ImageIO.write(img, "png", outputfile);
+		} catch(IOException e){
+			System.out.println(e.getLocalizedMessage());
+		}
 	}
 
 	@Override

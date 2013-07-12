@@ -17,9 +17,12 @@ import de.ur.ts.view.GUI;
 public class Controller implements MapViewListener, ControlViewListener,
 		DialogListener, AlgorithmListener {
 
+	private static final boolean SAVE_PICTURE = true;
 	private GUI gui;
 	private Map map;
 	private Algorithm algorithm = null;
+	
+	private String algorithmName = "";
 
 	private ArrayList<ControllerListener> listeners = new ArrayList<ControllerListener>();
 
@@ -76,6 +79,15 @@ public class Controller implements MapViewListener, ControlViewListener,
 			((ControllerListener) it.next()).onMapChange();
 		}
 	}
+	
+	private void notifySaveImage(){
+		if(SAVE_PICTURE && algorithm != null){
+			Iterator<ControllerListener> it = listeners.iterator();
+			while (it.hasNext()) {
+				((ControllerListener) it.next()).onSaveImage(algorithmName);
+			}
+		}
+	}
 
 	@Override
 	public void onStart(String algorithmName) {
@@ -102,6 +114,7 @@ public class Controller implements MapViewListener, ControlViewListener,
 		if (algorithm != null) {
 			algorithm.setListener(this);
 			algorithm.start();
+			this.algorithmName = algorithmName;
 			System.out.println("Start Algorithm!");
 		}
 	}
@@ -154,6 +167,7 @@ public class Controller implements MapViewListener, ControlViewListener,
 	@Override
 	public void refresh() {
 		notifyMapChange();
+		notifySaveImage();
 	}
 
 	public void onFaster() {

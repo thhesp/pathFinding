@@ -10,4 +10,6 @@ public interface ControllerListener {
 	
 	public void onDeactivateValues();
 	public void onActivateValues();
+	
+	public void onSaveImage(String algorithmName);
 }
