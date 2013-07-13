@@ -29,11 +29,22 @@ Dieses Referat diskutiert den Zusammenhang zwischen Suche und Information. Dabei
 ## Spiele mit perfekter/inperfekter Information
 http://en.wikipedia.org/wiki/Perfect_information
 
+## Null-Summen- und Nicht-Null-Summen-Spiele (http://tobiasthelen.de/ipd/gesamt.html#pd6)
+* Gefangendilemma (NNSS)
+* ??? (NSS)
+
+(##Iteration des Spiels?)
+
+
 ## Algorithmen und Anwendung
 * Schachspiel als Beispiel
+	* History of computer chess? (http://www.computerhistory.org/chess/index.php)
+	* Endgame Tablebase? (http://horizonchess.com/FAQ/Winboard/egtb.html)
 * Simulation von Algorithmen
-	*  Breiten- bzw. Tiefensuche (uninformiert)
-	* A* (informiert) 
+	* Breiten- bzw. Tiefensuche (uninformiert)
+	* A* (informiert)
+	* Alternative Ansätze? (http://goo.gl/qsQ0o)
+* Treesearch?
 
 # Literatur
 http://wirtschaftslexikon.gabler.de/Definition/spieltheorie.html
