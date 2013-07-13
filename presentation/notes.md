@@ -6,21 +6,19 @@
 Dieses Referat diskutiert den Zusammenhang zwischen Suche und Information. Dabei werden Auswirkungen durch Unterschiede in Qualität und Quantiät auf den Suchprozess in den Vordergrund gestellt. Als exemplarisches Informationsprobleme werden dabei Fälle im Kontext der *Spieltheorie* angenommen.
 
 ## Begriffsdefinition
-* Entscheidungstheorie
-* Spieltheorie 
-	* Abgrenzung zur klassischen Entscheidungstheorie
-	* Anwendungsbereiche
-	* Evolutionäre Spieltheorie?
-* Suche (abstrakt?)
 
 ### Spieltheorie und Spiel
-* Abgrenzung von anderen Feldern
+* Abgrenzung von anderen Feldern (siehe Wiki)
+* Abgrenzung zur klassischen Entscheidungstheorie
+* Evolutionäre Spieltheorie?
+* Anwendungsgebiete (Pfadsuche, KI, Evolution?)
 
 ### Suche
-* Definition im Kontext des Spielbegriffes
+* Definition im Kontext des Spielbegriffes (Pfadsuche, "Suche nach dem nächsten Zug")
 
 ### Information
 * Informationsbegriff in der Spieltheorie
+* Informationsbegriff in der Suche
 
 ## Theorie: Einfluss von Information auf Entscheidungsprobleme
 * Gefangenendilema
