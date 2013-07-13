@@ -175,6 +175,7 @@ public class Field {
 		inUse = false;
 		hasValue = false;
 		algorithmValue = DEFAULT_VALUE;
+		predecessor = null;
 	}
 
 	public Field getPredecessor() {

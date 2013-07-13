@@ -163,16 +163,31 @@ public class MapView extends JPanel implements MouseListener, ControllerListener
 		
 	}
 	
-	public void onSaveImage(String algorithmName){
+	public void onSaveImage(long systemTime, String algorithmName){
 		BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D cg = img.createGraphics();
 		paintComponent(cg);
+		String outDirStr = "./out/";
+		String runDirStr = outDirStr + systemTime +"/";
+		String algoDir = runDirStr + algorithmName + "/";
+		String outputStr = algoDir + System.currentTimeMillis() + ".png";
+		
 		try{
-			File directory = new File("./out/" + algorithmName+"/");
+			File outDir = new File(outDirStr);
+			if(!outDir.isFile()){
+				outDir.mkdir();
+			}
+			
+			File runDir = new File(runDirStr);
+			if(!runDir.isFile()){
+				runDir.mkdir();
+			}
+			
+			File directory = new File(algoDir);
 			if(!directory.isFile()){
 				directory.mkdir();
 			}
-			File outputfile = new File("./out/" + algorithmName +"/" + System.currentTimeMillis() + ".png");
+			File outputfile = new File(outputStr);
 			ImageIO.write(img, "png", outputfile);
 		} catch(IOException e){
 			System.out.println(e.getLocalizedMessage());

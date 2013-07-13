@@ -11,5 +11,5 @@ public interface ControllerListener {
 	public void onDeactivateValues();
 	public void onActivateValues();
 	
-	public void onSaveImage(String algorithmName);
+	public void onSaveImage(long systemTime, String algorithmName);
 }

@@ -26,8 +26,12 @@ public class Controller implements MapViewListener, ControlViewListener,
 
 	private ArrayList<ControllerListener> listeners = new ArrayList<ControllerListener>();
 
+	private long systemStart = 0;
+	
+	
 	public Controller() {
 		gui = new GUI(this, AlgorithmFactory.getAlgorithmList());
+		systemStart = System.currentTimeMillis();
 	}
 
 	public void addListener(ControllerListener listener) {
@@ -84,7 +88,7 @@ public class Controller implements MapViewListener, ControlViewListener,
 		if(SAVE_PICTURE && algorithm != null){
 			Iterator<ControllerListener> it = listeners.iterator();
 			while (it.hasNext()) {
-				((ControllerListener) it.next()).onSaveImage(algorithmName);
+				((ControllerListener) it.next()).onSaveImage(systemStart, algorithmName);
 			}
 		}
 	}
